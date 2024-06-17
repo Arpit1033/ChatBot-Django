@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "myapp/styles.css" %}">
+    {% comment %} ------Jquery CDN------------------ {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <h1 class="text-center font-bold text-gray-600 text-4xl m-3"> Chatbot App</h1>
+    <div class="m-10 p-4 border border-2 shadow-lg">
+        <div id="chatbot" class="ml-auto mr-auto w-3/4 mt-20 border border-gray-500 rounded-md p-6">
+            <p class="botText font-mono text-lg text-left leading-6 text-gray-500 ">
+                <span>
+                    Hi there
+                </span>
+            </p>
+        </div>
+
+        <div id="userInput" class="ml-auto mr-auto mt-10 w-3/4 text-center">
+            <input class="placeholder:italic placeholder:text-blue-400 border-b-2 border-gray-400 font-mono text-sm w-3/5 p-4 text-red-400" type="text" id="textInput" name = "userMessage" placeholder="Type your message...">
+            <input class="p-1 font-mono text-sm border border-2 border-gray-700 rounded-md bg-slate-900 hover:cursor-pointer" type="button" value="Send" id="buttonInput">
+        </div>
+    </div>
+
+    
+    
+    
+
+    <script>
+        function getUserResponse(){
+            var userText = $('#textInput').val()
+            var userHTML = "<p class='userText text-right font-mono text-lg leading-6 text-gray-500'>User: <span> "+userText+"</span></p>"
+
+            $('#textInput').val("");
+            $('#chatbot').append(userHTML);
+
+            $.get('/chatbot/getResponse',{userMessage : userText}).done(function(data){
+                var returnMessage = "<p class='botText font-mono text-lg text-left leading-6 text-gray-500'>Chatbot: <span>"+ data + "</span></p>";
+                $('#chatbot').append(returnMessage);
+            })
+
+
+
+        }
+
+        $('#buttonInput').click(function(){
+            getUserResponse();
+        })
+    </script>
+
+
+</body>
+</html>
