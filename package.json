@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"tailwind build myapp/static/myapp/tw.css -o myapp/static/myapp/styles.css"
+    "build": "tailwind build myapp/static/myapp/tw.css -o myapp/static/myapp/styles.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chatbot": "file:",
     "tailwindcss": "^2.2.16"
   }
 }
